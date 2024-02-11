@@ -3,6 +3,8 @@
 /node_modules
 /build
 /database
+package-lock.json
+
 
 # Logs
 logs
