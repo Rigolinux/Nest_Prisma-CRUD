@@ -14,14 +14,28 @@ export class UsersService {
     });
   }
 
-  async findAll(): Promise<User[]> {
-    return this.prisma.user.findMany();
+  async findAll(
+    delimiters: { limit: number; page: number } = { limit: 5, page: 5 },
+  ): Promise<User[]> {
+    const { limit, page } = delimiters;
+    return this.prisma.user.findMany({
+      take: limit,
+      skip: (page - 1) * limit,
+    });
   }
 
   async findOne(id: number): Promise<User> {
     return this.prisma.user.findUnique({
       where: {
         id,
+      },
+    });
+  }
+
+  async findOnebyUsername(username: string): Promise<User> {
+    return this.prisma.user.findUnique({
+      where: {
+        username,
       },
     });
   }
