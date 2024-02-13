@@ -4,7 +4,7 @@
 /build
 /database
 package-lock.json
-
+/prisma/migrations
 
 # Logs
 logs
