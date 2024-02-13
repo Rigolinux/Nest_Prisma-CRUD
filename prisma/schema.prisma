@@ -9,12 +9,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Roles {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[] // One-to-many relationship with User
+}
 
 model User {
-  id       Int   @id @default(autoincrement())
-  email    String   @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   name     String
   address  String?
-  username String   @unique 
+  username String @unique
   password String
+  roleId   Int    // Foreign key for Roles
+  role     Roles  @relation(fields: [roleId], references: [id]) // Corrected relation to Roles
 }
+

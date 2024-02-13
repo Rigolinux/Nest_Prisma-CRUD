@@ -18,4 +18,6 @@ export class CreateUserDto {
 
   @IsString()
   address: string;
+
+  roleId: number;
 }
