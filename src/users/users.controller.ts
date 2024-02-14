@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { RoleGuard } from 'src/auth/guards/role.guard';
 
 @Controller('users')
 export class UsersController {
@@ -24,7 +25,7 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
   findAll(@Query('limit') limitStr: string, @Query('page') pageStr: string) {
     const limit = parseInt(limitStr, 10);
     const page = parseInt(pageStr, 10);

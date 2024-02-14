@@ -17,10 +17,10 @@ export class UsersService {
   async findAll(
     delimiters: { limit: number; page: number } = { limit: 5, page: 5 },
   ): Promise<User[]> {
-    const { limit, page } = delimiters;
+    const { limit } = delimiters;
     return this.prisma.user.findMany({
+      skip: 5,
       take: limit,
-      skip: (page - 1) * limit,
     });
   }
 
